@@ -1,0 +1,67 @@
+file_input -> stmt_list
+stmt_list -> stmt stmt_list | ε
+stmt -> simple_stmt | compound_stmt
+simple_stmt -> small_stmt ';' simple_stmt | small_stmt
+small_stmt -> assignment | aug_assign_add | aug_assign_sub | aug_assign_mult | aug_assign_div | aug_assign_mod | import_stmt | from_import_stmt | return_stmt | pass_stmt | break_stmt | continue_stmt | expr_stmt
+assignment -> 'id' '=' expr
+aug_assign_add -> 'id' '+=' expr
+aug_assign_sub -> 'id' '-=' expr
+aug_assign_mult -> 'id' '*=' expr
+aug_assign_div -> 'id' '/=' expr
+aug_assign_mod -> 'id' '%=' expr
+import_stmt -> 'import' dotted_as_names
+from_import_stmt -> 'from' dotted_name 'import' import_as_names | 'from' dotted_name 'import' '*'
+dotted_name -> 'id' more_dots
+more_dots -> '.' 'id' more_dots | ε
+dotted_as_names -> dotted_as_name more_dotted
+more_dotted -> ',' dotted_as_name more_dotted | ε
+dotted_as_name -> dotted_name | dotted_name 'as' 'id'
+import_as_names -> import_as_name more_imports
+more_imports -> ',' import_as_name more_imports | ε
+import_as_name -> 'id' | 'id' 'as' 'id'
+return_stmt -> 'return' expr | 'return'
+pass_stmt -> 'pass'
+break_stmt -> 'break'
+continue_stmt -> 'continue'
+expr_stmt -> expr
+compound_stmt -> if_stmt | while_stmt | for_stmt | funcdef | classdef | match_stmt
+if_stmt -> 'if' expr ':' suite elif_part else_part
+elif_part -> 'elif' expr ':' suite elif_part | ε
+else_part -> 'else' ':' suite | ε
+while_stmt -> 'while' expr ':' suite else_part
+for_stmt -> 'for' 'id' 'in' expr ':' suite else_part
+funcdef -> 'def' 'id' '(' param_list ')' ':' suite
+param_list -> param_list_nonempty | ε
+param_list_nonempty -> 'id' more_params
+more_params -> ',' 'id' more_params | ε
+classdef -> 'class' 'id' '(' class_arg_list ')' ':' suite | 'class' 'id' ':' suite
+class_arg_list -> class_arg more_class_args | ε
+more_class_args -> ',' class_arg more_class_args | ε
+class_arg -> 'id'
+match_stmt -> 'match' expr ':' NEWLINE INDENT case_list DEDENT
+case_list -> case_stmt case_list | ε
+case_stmt -> 'case' expr ':' suite
+suite -> simple_stmt | NEWLINE INDENT stmt_list DEDENT
+expr -> or_test
+or_test -> and_test or_rest
+or_rest -> 'or' and_test or_rest | ε
+and_test -> not_test and_rest
+and_rest -> 'and' not_test and_rest | ε
+not_test -> 'not' not_test | comparison
+comparison -> arith_expr comp_rest
+comp_rest -> comp_op arith_expr comp_rest | ε
+comp_op -> '<' | '>' | '==' | '!=' | '<=' | '>=' | 'in' | 'is' | 'is' 'not' | 'not' 'in'
+arith_expr -> term arith_rest
+arith_rest -> add_op term arith_rest | ε
+add_op -> '+' | '-'
+term -> factor term_rest
+term_rest -> mul_op factor term_rest | ε
+mul_op -> '*' | '/' | '%' | '//'
+factor -> '+' factor | '-' factor | power
+power -> atom power_rest
+power_rest -> '**' factor | ε
+atom -> 'id' | 'tk_entero' | 'tk_cadena' | 'None' | 'True' | 'False' | '(' expr ')' | '[' expr_list ']' | '{' dict_items '}'
+expr_list -> expr expr_list_rest | ε
+expr_list_rest -> ',' expr expr_list_rest | ε
+dict_items -> dict_item dict_items_rest | ε
+dict_items_rest -> ',' dict_item dict_items_rest | ε

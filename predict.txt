@@ -1,0 +1,137 @@
+PREDICT(file_input -> stmt_list) = {'(', '+', '-', 'False', 'None', 'True', '[', 'break', 'class', 'continue', 'def', 'for', 'from', 'id', 'if', 'import', 'match', 'not', 'pass', 'return', 'tk_cadena', 'tk_entero', 'while', '{', $}
+PREDICT(stmt_list -> stmt stmt_list) = {'(', '+', '-', 'False', 'None', 'True', '[', 'break', 'class', 'continue', 'def', 'for', 'from', 'id', 'if', 'import', 'match', 'not', 'pass', 'return', 'tk_cadena', 'tk_entero', 'while', '{'}
+PREDICT(stmt_list -> ε) = {DEDENT, ε, $}
+PREDICT(stmt -> simple_stmt) = {'(', '+', '-', 'False', 'None', 'True', '[', 'break', 'continue', 'from', 'id', 'import', 'not', 'pass', 'return', 'tk_cadena', 'tk_entero', '{'}
+PREDICT(stmt -> compound_stmt) = {'class', 'def', 'for', 'if', 'match', 'while'}
+PREDICT(simple_stmt -> small_stmt ';' simple_stmt) = {'(', '+', '-', 'False', 'None', 'True', '[', 'break', 'continue', 'from', 'id', 'import', 'not', 'pass', 'return', 'tk_cadena', 'tk_entero', '{'}
+PREDICT(simple_stmt -> small_stmt) = {'(', '+', '-', 'False', 'None', 'True', '[', 'break', 'continue', 'from', 'id', 'import', 'not', 'pass', 'return', 'tk_cadena', 'tk_entero', '{'}
+PREDICT(small_stmt -> assignment) = {'id'}
+PREDICT(small_stmt -> aug_assign_add) = {'id'}
+PREDICT(small_stmt -> aug_assign_sub) = {'id'}
+PREDICT(small_stmt -> aug_assign_mult) = {'id'}
+PREDICT(small_stmt -> aug_assign_div) = {'id'}
+PREDICT(small_stmt -> aug_assign_mod) = {'id'}
+PREDICT(small_stmt -> import_stmt) = {'import'}
+PREDICT(small_stmt -> from_import_stmt) = {'from'}
+PREDICT(small_stmt -> return_stmt) = {'return'}
+PREDICT(small_stmt -> pass_stmt) = {'pass'}
+PREDICT(small_stmt -> break_stmt) = {'break'}
+PREDICT(small_stmt -> continue_stmt) = {'continue'}
+PREDICT(small_stmt -> expr_stmt) = {'(', '+', '-', 'False', 'None', 'True', '[', 'id', 'not', 'tk_cadena', 'tk_entero', '{'}
+PREDICT(assignment -> 'id' '=' expr) = {'id'}
+PREDICT(aug_assign_add -> 'id' '+=' expr) = {'id'}
+PREDICT(aug_assign_sub -> 'id' '-=' expr) = {'id'}
+PREDICT(aug_assign_mult -> 'id' '*=' expr) = {'id'}
+PREDICT(aug_assign_div -> 'id' '/=' expr) = {'id'}
+PREDICT(aug_assign_mod -> 'id' '%=' expr) = {'id'}
+PREDICT(import_stmt -> 'import' dotted_as_names) = {'import'}
+PREDICT(from_import_stmt -> 'from' dotted_name 'import' import_as_names) = {'from'}
+PREDICT(from_import_stmt -> 'from' dotted_name 'import' '*') = {'from'}
+PREDICT(dotted_name -> 'id' more_dots) = {'id'}
+PREDICT(more_dots -> '.' 'id' more_dots) = {'.'}
+PREDICT(more_dots -> ε) = {'(', '+', ',', '-', ';', 'False', 'None', 'True', '[', 'as', 'break', 'case', 'class', 'continue', 'def', 'elif', 'else', 'for', 'from', 'id', 'if', 'import', 'match', 'not', 'pass', 'return', 'tk_cadena', 'tk_entero', 'while', '{', DEDENT, ε, $}
+PREDICT(dotted_as_names -> dotted_as_name more_dotted) = {'id'}
+PREDICT(more_dotted -> ',' dotted_as_name more_dotted) = {','}
+PREDICT(more_dotted -> ε) = {'(', '+', '-', ';', 'False', 'None', 'True', '[', 'break', 'case', 'class', 'continue', 'def', 'elif', 'else', 'for', 'from', 'id', 'if', 'import', 'match', 'not', 'pass', 'return', 'tk_cadena', 'tk_entero', 'while', '{', DEDENT, ε, $}
+PREDICT(dotted_as_name -> dotted_name) = {'id'}
+PREDICT(dotted_as_name -> dotted_name 'as' 'id') = {'id'}
+PREDICT(import_as_names -> import_as_name more_imports) = {'id'}
+PREDICT(more_imports -> ',' import_as_name more_imports) = {','}
+PREDICT(more_imports -> ε) = {'(', '+', '-', ';', 'False', 'None', 'True', '[', 'break', 'case', 'class', 'continue', 'def', 'elif', 'else', 'for', 'from', 'id', 'if', 'import', 'match', 'not', 'pass', 'return', 'tk_cadena', 'tk_entero', 'while', '{', DEDENT, ε, $}
+PREDICT(import_as_name -> 'id') = {'id'}
+PREDICT(import_as_name -> 'id' 'as' 'id') = {'id'}
+PREDICT(return_stmt -> 'return' expr) = {'return'}
+PREDICT(return_stmt -> 'return') = {'return'}
+PREDICT(pass_stmt -> 'pass') = {'pass'}
+PREDICT(break_stmt -> 'break') = {'break'}
+PREDICT(continue_stmt -> 'continue') = {'continue'}
+PREDICT(expr_stmt -> expr) = {'(', '+', '-', 'False', 'None', 'True', '[', 'id', 'not', 'tk_cadena', 'tk_entero', '{'}
+PREDICT(compound_stmt -> if_stmt) = {'if'}
+PREDICT(compound_stmt -> while_stmt) = {'while'}
+PREDICT(compound_stmt -> for_stmt) = {'for'}
+PREDICT(compound_stmt -> funcdef) = {'def'}
+PREDICT(compound_stmt -> classdef) = {'class'}
+PREDICT(compound_stmt -> match_stmt) = {'match'}
+PREDICT(if_stmt -> 'if' expr ':' suite elif_part else_part) = {'if'}
+PREDICT(elif_part -> 'elif' expr ':' suite elif_part) = {'elif'}
+PREDICT(elif_part -> ε) = {'(', '+', '-', 'False', 'None', 'True', '[', 'break', 'class', 'continue', 'def', 'else', 'for', 'from', 'id', 'if', 'import', 'match', 'not', 'pass', 'return', 'tk_cadena', 'tk_entero', 'while', '{', DEDENT, ε, $}
+PREDICT(else_part -> 'else' ':' suite) = {'else'}
+PREDICT(else_part -> ε) = {'(', '+', '-', 'False', 'None', 'True', '[', 'break', 'class', 'continue', 'def', 'for', 'from', 'id', 'if', 'import', 'match', 'not', 'pass', 'return', 'tk_cadena', 'tk_entero', 'while', '{', DEDENT, ε, $}
+PREDICT(while_stmt -> 'while' expr ':' suite else_part) = {'while'}
+PREDICT(for_stmt -> 'for' 'id' 'in' expr ':' suite else_part) = {'for'}
+PREDICT(funcdef -> 'def' 'id' '(' param_list ')' ':' suite) = {'def'}
+PREDICT(param_list -> param_list_nonempty) = {'id'}
+PREDICT(param_list -> ε) = {')', ε}
+PREDICT(param_list_nonempty -> 'id' more_params) = {'id'}
+PREDICT(more_params -> ',' 'id' more_params) = {','}
+PREDICT(more_params -> ε) = {')', ε}
+PREDICT(classdef -> 'class' 'id' '(' class_arg_list ')' ':' suite) = {'class'}
+PREDICT(classdef -> 'class' 'id' ':' suite) = {'class'}
+PREDICT(class_arg_list -> class_arg more_class_args) = {'id'}
+PREDICT(class_arg_list -> ε) = {')', ε}
+PREDICT(more_class_args -> ',' class_arg more_class_args) = {','}
+PREDICT(more_class_args -> ε) = {')', ε}
+PREDICT(class_arg -> 'id') = {'id'}
+PREDICT(match_stmt -> 'match' expr ':' NEWLINE INDENT case_list DEDENT) = {'match'}
+PREDICT(case_list -> case_stmt case_list) = {'case'}
+PREDICT(case_list -> ε) = {DEDENT, ε}
+PREDICT(case_stmt -> 'case' expr ':' suite) = {'case'}
+PREDICT(suite -> simple_stmt) = {'(', '+', '-', 'False', 'None', 'True', '[', 'break', 'continue', 'from', 'id', 'import', 'not', 'pass', 'return', 'tk_cadena', 'tk_entero', '{'}
+PREDICT(suite -> NEWLINE INDENT stmt_list DEDENT) = {NEWLINE}
+PREDICT(expr -> or_test) = {'(', '+', '-', 'False', 'None', 'True', '[', 'id', 'not', 'tk_cadena', 'tk_entero', '{'}
+PREDICT(or_test -> and_test or_rest) = {'(', '+', '-', 'False', 'None', 'True', '[', 'id', 'not', 'tk_cadena', 'tk_entero', '{'}
+PREDICT(or_rest -> 'or' and_test or_rest) = {'or'}
+PREDICT(or_rest -> ε) = {'(', ')', '+', ',', '-', ':', ';', 'False', 'None', 'True', '[', ']', 'break', 'case', 'class', 'continue', 'def', 'elif', 'else', 'for', 'from', 'id', 'if', 'import', 'match', 'not', 'pass', 'return', 'tk_cadena', 'tk_entero', 'while', '{', DEDENT, ε, $}
+PREDICT(and_test -> not_test and_rest) = {'(', '+', '-', 'False', 'None', 'True', '[', 'id', 'not', 'tk_cadena', 'tk_entero', '{'}
+PREDICT(and_rest -> 'and' not_test and_rest) = {'and'}
+PREDICT(and_rest -> ε) = {'(', ')', '+', ',', '-', ':', ';', 'False', 'None', 'True', '[', ']', 'break', 'case', 'class', 'continue', 'def', 'elif', 'else', 'for', 'from', 'id', 'if', 'import', 'match', 'not', 'or', 'pass', 'return', 'tk_cadena', 'tk_entero', 'while', '{', DEDENT, ε, $}
+PREDICT(not_test -> 'not' not_test) = {'not'}
+PREDICT(not_test -> comparison) = {'(', '+', '-', 'False', 'None', 'True', '[', 'id', 'tk_cadena', 'tk_entero', '{'}
+PREDICT(comparison -> arith_expr comp_rest) = {'(', '+', '-', 'False', 'None', 'True', '[', 'id', 'tk_cadena', 'tk_entero', '{'}
+PREDICT(comp_rest -> comp_op arith_expr comp_rest) = {'!=', '<', '<=', '==', '>', '>=', 'in', 'is', 'not'}
+PREDICT(comp_rest -> ε) = {'(', ')', '+', ',', '-', ':', ';', 'False', 'None', 'True', '[', ']', 'and', 'break', 'case', 'class', 'continue', 'def', 'elif', 'else', 'for', 'from', 'id', 'if', 'import', 'match', 'not', 'or', 'pass', 'return', 'tk_cadena', 'tk_entero', 'while', '{', DEDENT, ε, $}
+PREDICT(comp_op -> '<') = {'<'}
+PREDICT(comp_op -> '>') = {'>'}
+PREDICT(comp_op -> '==') = {'=='}
+PREDICT(comp_op -> '!=') = {'!='}
+PREDICT(comp_op -> '<=') = {'<='}
+PREDICT(comp_op -> '>=') = {'>='}
+PREDICT(comp_op -> 'in') = {'in'}
+PREDICT(comp_op -> 'is') = {'is'}
+PREDICT(comp_op -> 'is' 'not') = {'is'}
+PREDICT(comp_op -> 'not' 'in') = {'not'}
+PREDICT(arith_expr -> term arith_rest) = {'(', '+', '-', 'False', 'None', 'True', '[', 'id', 'tk_cadena', 'tk_entero', '{'}
+PREDICT(arith_rest -> add_op term arith_rest) = {'+', '-'}
+PREDICT(arith_rest -> ε) = {'!=', '(', ')', '+', ',', '-', ':', ';', '<', '<=', '==', '>', '>=', 'False', 'None', 'True', '[', ']', 'and', 'break', 'case', 'class', 'continue', 'def', 'elif', 'else', 'for', 'from', 'id', 'if', 'import', 'in', 'is', 'match', 'not', 'or', 'pass', 'return', 'tk_cadena', 'tk_entero', 'while', '{', DEDENT, ε, $}
+PREDICT(add_op -> '+') = {'+'}
+PREDICT(add_op -> '-') = {'-'}
+PREDICT(term -> factor term_rest) = {'(', '+', '-', 'False', 'None', 'True', '[', 'id', 'tk_cadena', 'tk_entero', '{'}
+PREDICT(term_rest -> mul_op factor term_rest) = {'%', '*', '/', '//'}
+PREDICT(term_rest -> ε) = {'!=', '(', ')', '+', ',', '-', ':', ';', '<', '<=', '==', '>', '>=', 'False', 'None', 'True', '[', ']', 'and', 'break', 'case', 'class', 'continue', 'def', 'elif', 'else', 'for', 'from', 'id', 'if', 'import', 'in', 'is', 'match', 'not', 'or', 'pass', 'return', 'tk_cadena', 'tk_entero', 'while', '{', DEDENT, ε, $}
+PREDICT(mul_op -> '*') = {'*'}
+PREDICT(mul_op -> '/') = {'/'}
+PREDICT(mul_op -> '%') = {'%'}
+PREDICT(mul_op -> '//') = {'//'}
+PREDICT(factor -> '+' factor) = {'+'}
+PREDICT(factor -> '-' factor) = {'-'}
+PREDICT(factor -> power) = {'(', 'False', 'None', 'True', '[', 'id', 'tk_cadena', 'tk_entero', '{'}
+PREDICT(power -> atom power_rest) = {'(', 'False', 'None', 'True', '[', 'id', 'tk_cadena', 'tk_entero', '{'}
+PREDICT(power_rest -> '**' factor) = {'**'}
+PREDICT(power_rest -> ε) = {'!=', '%', '(', ')', '*', '+', ',', '-', '/', '//', ':', ';', '<', '<=', '==', '>', '>=', 'False', 'None', 'True', '[', ']', 'and', 'break', 'case', 'class', 'continue', 'def', 'elif', 'else', 'for', 'from', 'id', 'if', 'import', 'in', 'is', 'match', 'not', 'or', 'pass', 'return', 'tk_cadena', 'tk_entero', 'while', '{', DEDENT, ε, $}
+PREDICT(atom -> 'id') = {'id'}
+PREDICT(atom -> 'tk_entero') = {'tk_entero'}
+PREDICT(atom -> 'tk_cadena') = {'tk_cadena'}
+PREDICT(atom -> 'None') = {'None'}
+PREDICT(atom -> 'True') = {'True'}
+PREDICT(atom -> 'False') = {'False'}
+PREDICT(atom -> '(' expr ')') = {'('}
+PREDICT(atom -> '[' expr_list ']') = {'['}
+PREDICT(atom -> '{' dict_items '}') = {'{'}
+PREDICT(expr_list -> expr expr_list_rest) = {'(', '+', '-', 'False', 'None', 'True', '[', 'id', 'not', 'tk_cadena', 'tk_entero', '{'}
+PREDICT(expr_list -> ε) = {']', ε}
+PREDICT(expr_list_rest -> ',' expr expr_list_rest) = {','}
+PREDICT(expr_list_rest -> ε) = {']', ε}
+PREDICT(dict_items -> dict_item dict_items_rest) = {dict_item}
+PREDICT(dict_items -> ε) = {'}', ε}
+PREDICT(dict_items_rest -> ',' dict_item dict_items_rest) = {','}
+PREDICT(dict_items_rest -> ε) = {'}', ε}
