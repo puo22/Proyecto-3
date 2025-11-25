@@ -1,0 +1,11 @@
+# Prueba de matrices DeepLang
+
+A = [ [1,2], [3,4] ]
+B = [ [5,6], [7,8] ]
+
+print( A + B )       # suma
+print( B - A )       # resta
+print( A * B )       # multiplicación
+
+print( transpose(A) )
+print( inverse(A) )

@@ -1,0 +1,157 @@
+# ============================================
+#      TEST COMPLETO PARA DEEPLANG
+# ============================================
+
+print("========== INICIO DE TEST ==========")
+
+# ============================================
+# 1. VARIABLES Y ARITMÉTICA
+# ============================================
+a = 10
+b = 5
+c = a + b * 2 - 3
+print("Resultado aritmético:")
+print(c)
+
+# ============================================
+# 2. LISTAS Y OPERACIONES
+# ============================================
+lista = [1, 2, 3, 4]
+print("Lista completa:")
+print(lista)
+
+print("Indexing lista[2]:")
+print(lista[2])
+
+# ============================================
+# 3. MATRICES
+# ============================================
+A = [[1, 2], [3, 4]]
+B = [[2, 0], [1, 2]]
+
+print("Matriz A:")
+print(A)
+print("Matriz B:")
+print(B)
+
+print("A + B:")
+print(A + B)
+
+print("A - B:")
+print(A - B)
+
+print("A * B:")
+print(A * B)
+
+print("Transpose(A):")
+print(transpose(A))
+
+# ============================================
+# 4. TENSORES
+# ============================================
+T1 = [[1,2],[3,4]]
+T2 = [[10,20],[30,40]]
+
+print("Suma de tensores:")
+print(T1 + T2)
+
+# ============================================
+# 5. FUNCIONES
+# ============================================
+def suma(x, y):
+    z = x + y
+    return z
+
+resultado = suma(7, 8)
+print("Resultado función suma(7,8):")
+print(resultado)
+
+# ============================================
+# 6. IF / ELSE
+# ============================================
+x = 4
+if x > 5:
+    print("x es mayor que 5")
+elif x == 5:
+    print("x es igual a 5")
+else:
+    print("x es menor que 5")
+
+# ============================================
+# 7. WHILE
+# ============================================
+i = 0
+print("While loop:")
+while i < 3:
+    print(i)
+    i = i + 1
+
+# ============================================
+# 8. FOR
+# ============================================
+print("For loop:")
+for n in [10,20,30]:
+    print(n)
+
+# ============================================
+# 9. ARCHIVOS
+# ============================================
+write("salida_test.txt", "DeepLang funcionando!")
+contenido = read("salida_test.txt")
+print("Contenido archivo:")
+print(contenido)
+
+# ============================================
+# 10. MACHINE LEARNING - LINEAR REGRESSION
+# ============================================
+x = [1, 2, 3, 4, 5]
+y = [2, 4, 5, 4, 5]
+
+modelo = linreg(x, y)
+
+print("Pendiente:")
+print(modelo["m"])
+
+print("Intercepto:")
+print(modelo["b"])
+
+pred = modelo["m"] * 6 + modelo["b"]
+print("Predicción para x=6:")
+print(pred)
+
+# ============================================
+# 11. MACHINE LEARNING - MLP
+# ============================================
+entrada = [0.5, 0.8]
+pesos = [
+    [0.2, -0.1],
+    [0.4,  0.3]
+]
+
+salida = mlp(pesos, entrada)
+
+print("Salida MLP:")
+print(salida)
+
+# ============================================
+# 12. GRÁFICAS
+# ============================================
+xpoints = [1,2,3,4]
+ypoints = [2,3,6,8]
+
+print("Plot line:")
+plot_line(xpoints, ypoints)
+
+print("Plot scatter:")
+plot_scatter(xpoints, ypoints)
+
+print("Plot bar:")
+plot_bar(xpoints, ypoints)
+
+print("Plot hist:")
+plot_hist(xpoints)
+
+# ============================================
+# FIN
+# ============================================
+print("========== FIN DEL TEST ==========")

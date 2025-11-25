@@ -1,0 +1,5 @@
+write("salida.txt", "Hola desde DeepLang!")
+
+contenido = read("salida.txt")
+
+print(contenido)

@@ -1,0 +1,49 @@
+# -----------------------------
+# Pruebas de Machine Learning
+# DeepLang Test: ML
+# -----------------------------
+
+# -----------------------------
+# REGRESIÓN LINEAL
+# -----------------------------
+# Datos de ejemplo
+x = [1, 2, 3, 4, 5]
+y = [2, 4, 5, 4, 5]
+
+# Ejecutar regresión lineal
+modelo = linreg(x, y)
+
+print("Pendiente (m):")
+print(modelo["m"])
+
+print("Intercepto (b):")
+print(modelo["b"])
+
+# Predicción simple
+pred = modelo["m"] * 6 + modelo["b"]
+print("Predicción para x=6:")
+print(pred)
+
+
+# -----------------------------
+# PERCEPTRÓN MULTICAPA
+# -----------------------------
+# Usamos tus funciones de mlp_predict del runtime
+
+# Entrada al perceptrón (vector)
+entrada = [0.5, 0.8]
+
+# “Modelo” simple para pruebas
+# DeepLang no soporta diccionarios todavía, 
+# pero mlp_predict toma (pesos, entradas)
+# así que armamos pesos como matriz
+pesos = [
+    [0.2, -0.1], 
+    [0.4,  0.3]
+]
+
+# Ejecutar predicción MLP
+salida = mlp_predict(pesos, entrada)
+
+print("Salida perceptrón:")
+print(salida)
